@@ -20,13 +20,14 @@ CREATE TABLE recents (
     shots bigint,
     hits bigint,
     update_at timestamp,
-    UNIQUE (account_id, ship_id, last_battle_time)  -- 添加唯一约束
+    server integer,
+    UNIQUE (account_id, ship_id, server, last_battle_time)  -- 添加唯一约束
 );
 """
 
 total_index = """
 CREATE INDEX idx_account_ship_update_time 
-ON recents (account_id, ship_id, update_at);
+ON recents (account_id, ship_id, server, update_at);
 """
 
 update_at_index = """

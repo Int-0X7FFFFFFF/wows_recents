@@ -83,9 +83,9 @@ async def update_user_ships(
                 query = """
                 INSERT INTO recents (
                     account_id, ship_id, last_battle_time, battles, damage_dealt, 
-                    wins, xp, frags, survived_battles, shots, hits, update_at
-                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-                ON CONFLICT (account_id, ship_id, last_battle_time) DO UPDATE SET
+                    wins, xp, frags, survived_battles, shots, hits, update_at, server
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+                ON CONFLICT (account_id, ship_id, server, last_battle_time) DO UPDATE SET
                     last_battle_time = EXCLUDED.last_battle_time,
                     battles = EXCLUDED.battles,
                     damage_dealt = EXCLUDED.damage_dealt,
@@ -112,5 +112,6 @@ async def update_user_ships(
                     survived_battles,       # $9: survived_battles
                     shots,                  # $10: shots
                     hits,                   # $11: hits
-                    now                     # $12: update_at (当前时间)
+                    now,                    # $12: update_at (当前时间)
+                    server,                 # $13: server
                 )
