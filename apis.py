@@ -10,7 +10,7 @@ wows_warship_stat_asia = "https://api.worldofwarships.asia/wows/ships/stats/"
 
 wows_clan_detail_ru = "https://api.worldofwarships.ru/wows/clans/info/"
 wows_clan_detail_eu = "https://api.worldofwarships.eu/wows/clans/info/"
-wows_clan_detail_na = "https://api.worldofwarships.na/wows/clans/info/"
+wows_clan_detail_na = "https://api.worldofwarships.com/wows/clans/info/"
 wows_clan_detail_asia = "https://api.worldofwarships.asia/wows/clans/info/"
 
 wows_account_player_personal_data_ru = (
