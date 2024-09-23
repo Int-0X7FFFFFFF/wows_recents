@@ -4,8 +4,9 @@ from apis import api_get_player_ship_data, api_get_play_personal_data
 from config import Config
 from collections import defaultdict
 import asyncio
-from datetime import datetime
+from datetime import datetime, timezone
 from connect_pool import DatabasePoll
+from zoneinfo import ZoneInfo
 
 user_battle_time_cache = defaultdict(int)
 paginate = lambda a: map(lambda b: a[b : b + 100], range(0, len(a), 100))
@@ -58,7 +59,7 @@ async def update_user_ships(
         return
 
     # 获取当前时间戳，作为更新时间
-    now = datetime.utcnow()
+    now = datetime.now()
 
     pool = DatabasePoll._pool  # 假设你有一个连接池
     async with pool.acquire() as con:
