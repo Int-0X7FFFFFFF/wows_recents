@@ -1,36 +1,28 @@
 import logging
 from token_pool import TokenPool
 from config import Config
-from apis import api_get_clan_detail
-import asyncio
+from aiowpi import WOWS_ASIA, WOWS_EU, WOWS_NA, WOWS_RU
 
 paginate = lambda a: map(lambda b: a[b : b + 100], range(0, len(a), 100))
+int2server = [
+    WOWS_ASIA,
+    WOWS_RU,
+    WOWS_EU,
+    WOWS_NA,
+]
 
 logger = logging.getLogger("main")
 config = Config()
 
 async def update_clan(token_pool: TokenPool) -> None:
     users_tmp = [[], [], [], []]
-
-    # 使用 TokenPool 获取的 session
-    async with asyncio.TaskGroup() as tg:
-        for server, clans in enumerate(config.update_clans):
-            tasks = []
-            for page in paginate(clans):
-                # 从 TokenPool 获取 token 和 session
-                token, session = await token_pool.get()
-                tasks.append(
-                    tg.create_task(
-                        api_get_clan_detail(session, ",".join(page), server, token)
-                    )
-                )
-
-            for task in tasks:
-                data = await task  # 等待任务完成并获取结果
-                if data:
-                    for _, clan in data.items():
-                        members_ids = clan["members_ids"]
-                        users_tmp[server].extend(members_ids)
+    wpi = await token_pool.get()
+    for server, clans in enumerate(config.update_clans):
+        if clans:
+            if data := await wpi.clans.details(int2server[server], clans):
+                for clan in data:
+                    members_ids = clan["members_ids"]
+                    users_tmp[server].extend(members_ids)
 
     # 更新 config 中的用户列表
     config.update_users = users_tmp

@@ -163,3 +163,4 @@ cython_debug/
 /config.py
 log.txt
 main.pid
+.vscode

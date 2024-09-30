@@ -49,7 +49,6 @@ async def main() -> None:
                         await update_clan(token_pool)
                     await asyncio.sleep(config.running_interval)
         finally:
-            await token_pool.close_sessions()
             await DatabasePoll().__aexit__()
 
 
