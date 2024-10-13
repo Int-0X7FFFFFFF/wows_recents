@@ -6,13 +6,17 @@ The `intmax/wows_recents_refractor` is a Docker image designed to help you manag
 
 ## Prerequisites
 
-- Docker installed on your machine.
+- Docker installed on your machine (opt.).
 - A valid [Docker Hub](https://hub.docker.com/) account (if you wish to contribute or customize the image).
 - Properly configured PostgreSQL database.
 
 ## Usage
 
-### Pull the Docker Image
+### make your config.py example in env_example/config.py
+
+### make sure the config in the working dir
+
+### Pull the Docker Image running with docker
 
 To get started, you need to pull the Docker image from Docker Hub:
 
@@ -44,4 +48,13 @@ This will run the main functionality of the application and process the recent b
 
 ```bash
 docker run -d -v $(pwd)/config.py:/app/config.py intmax/wows_recents_refractor > logs.txt
+```
+
+
+## running out of docker
+
+```bash
+pip install -r requirements.txt
+python3 init_table.py # only need at first time
+python3 main.py
 ```
