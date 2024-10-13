@@ -8,7 +8,7 @@ The `intmax/wows_recents_refractor` is a Docker image designed to help you manag
 
 - Docker installed on your machine.
 - A valid [Docker Hub](https://hub.docker.com/) account (if you wish to contribute or customize the image).
-- Properly configured PostgreSQL database (optional, but recommended).
+- Properly configured PostgreSQL database.
 
 ## Usage
 
