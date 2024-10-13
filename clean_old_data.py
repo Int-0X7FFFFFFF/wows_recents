@@ -1,11 +1,10 @@
 import asyncio
-import logging
+from loguru import logger
 import asyncpg
 from datetime import datetime, timedelta
 
 from connect_pool import DatabasePoll
 
-logger = logging.getLogger("main")
 
 async def cleanup_old_data():
     while True:

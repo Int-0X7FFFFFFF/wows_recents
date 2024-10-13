@@ -2,30 +2,19 @@ import time
 from clean_old_data import cleanup_old_data
 from config import Config
 from multiprocessing import Manager
-import logging
+from loguru import logger
 import asyncio
 from token_pool import TokenPool
 from update_clan import update_clan
 from update_user import update_user
 from connect_pool import DatabasePoll
-
-logger = logging.getLogger("main")
-logger.setLevel(level=logging.INFO)
-handler = logging.FileHandler("log.txt")
-handler.setLevel(logging.INFO)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-handler.setFormatter(formatter)
-
-console = logging.StreamHandler()
-console.setLevel(logging.DEBUG)
-console.setFormatter(formatter)
-
-logger.addHandler(handler)
-logger.addHandler(console)
+import sys
 
 config = Config()
+logger.add("info_{time}.log", level="INFO", rotation="12:00")
+logger.add(sys.stdout, format="{time} - {level} - {message}", filter="sub.module")
 
-
+@logger.catch
 async def main() -> None:
     with Manager() as manager:
         shared_index = manager.Value("i", 0)

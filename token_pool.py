@@ -1,4 +1,3 @@
-import aiohttp
 from asyncio import Lock
 from typing import List
 from aiowpi import WPIClient

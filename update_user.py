@@ -1,4 +1,4 @@
-import logging
+from loguru import logger
 from token_pool import TokenPool
 from config import Config
 from collections import defaultdict
@@ -17,11 +17,6 @@ int2server = [
     WOWS_NA,
 ]
 
-logger = logging.getLogger("main")
-console = logging.StreamHandler()
-console.setLevel(logging.DEBUG)
-
-logger.addHandler(console)
 config = Config()
 
 async def update_user(token_pool: TokenPool) -> None:

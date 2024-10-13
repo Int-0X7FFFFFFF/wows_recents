@@ -1,4 +1,4 @@
-import logging
+from loguru import logger
 from token_pool import TokenPool
 from config import Config
 from aiowpi import WOWS_ASIA, WOWS_EU, WOWS_NA, WOWS_RU
@@ -11,7 +11,6 @@ int2server = [
     WOWS_NA,
 ]
 
-logger = logging.getLogger("main")
 config = Config()
 
 async def update_clan(token_pool: TokenPool) -> None:

@@ -1,9 +1,7 @@
-import logging
+from loguru import logger
 import asyncpg
 from asyncpg import Pool
 from config import Config
-
-logger = logging.getLogger("main")
 
 config = Config()
 
