@@ -1,4 +1,4 @@
-from loguru import logger
+from config import logger
 from token_pool import TokenPool
 from config import Config
 from aiowpi import WOWS_ASIA, WOWS_EU, WOWS_NA, WOWS_RU

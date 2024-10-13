@@ -1,4 +1,4 @@
-from loguru import logger
+from config import logger
 from token_pool import TokenPool
 from config import Config
 from collections import defaultdict

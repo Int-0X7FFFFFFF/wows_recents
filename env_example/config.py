@@ -1,5 +1,9 @@
 import threading
+from loguru import logger
+import sys
 
+logger.add("info_{time}.log", level="INFO", rotation="12:00")
+logger.add(sys.stdout, format="{time} - {level} - {message}", filter="sub.module", level="INFO")
 
 class Config(object):
     _instance_lock = threading.Lock()

@@ -1,5 +1,5 @@
 import asyncio
-from loguru import logger
+from config import logger
 import asyncpg
 from datetime import datetime, timedelta
 

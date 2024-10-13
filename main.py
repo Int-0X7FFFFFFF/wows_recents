@@ -2,17 +2,18 @@ import time
 from clean_old_data import cleanup_old_data
 from config import Config
 from multiprocessing import Manager
-from loguru import logger
+from config import logger
 import asyncio
 from token_pool import TokenPool
 from update_clan import update_clan
 from update_user import update_user
 from connect_pool import DatabasePoll
-import sys
+import os
+from table_init import main as init_db
+
+
 
 config = Config()
-logger.add("info_{time}.log", level="INFO", rotation="12:00")
-logger.add(sys.stdout, format="{time} - {level} - {message}", filter="sub.module")
 
 @logger.catch
 async def main() -> None:
@@ -42,5 +43,9 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    logger.info("Init")
+    command = os.getenv("COMMAND", "run")
+    if command == "init":
+        logger.info("INIT database")
+        asyncio.run(init_db())
+    logger.info("Starting application...")
     asyncio.run(main())

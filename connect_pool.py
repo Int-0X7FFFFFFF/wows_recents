@@ -1,4 +1,4 @@
-from loguru import logger
+from config import logger
 import asyncpg
 from asyncpg import Pool
 from config import Config
